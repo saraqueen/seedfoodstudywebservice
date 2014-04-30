@@ -116,7 +116,4 @@ if __name__ == '__main__':
     handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.WARNING)
     app.logger.addHandler(handler)
-    initialize()
-    app.run(host=os.environ['OPENSHIFT_PYTHON_IP'],port=int(os.environ['OPENSHIFT_PYTHON_PORT']),debug='true')
-
-
+    initialize()    
