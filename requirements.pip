@@ -1,5 +1,5 @@
 # Install with `pip install -r requirements.pip`.
-Flask
-numpy
-pandas
 configparser
+Flask
+numpy 
+pandas

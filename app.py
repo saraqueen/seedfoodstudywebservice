@@ -6,6 +6,7 @@ from utils import initialize, get_chart_data, get_content_data_chart, get_cdt_da
 import logging
 from logging.handlers import RotatingFileHandler
 from werkzeug.contrib.cache import SimpleCache
+import os
 
 app = Flask(__name__)
 
@@ -116,6 +117,6 @@ if __name__ == '__main__':
     handler.setLevel(logging.WARNING)
     app.logger.addHandler(handler)
     initialize()
-    app.run(debug='true')
+    app.run(host=os.environ['OPENSHIFT_PYTHON_IP'],port=int(os.environ['OPENSHIFT_PYTHON_PORT']),debug='true')
 
 
