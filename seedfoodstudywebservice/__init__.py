@@ -107,7 +107,7 @@ def get_contentdata(ht):
     }       
     return jsonify(obj)
 
-@app.route('/test')
+@app.route('/')
 @crossdomain(origin='*')
 def get_test():
     return "Testing the Seeding Food Studies Application"
