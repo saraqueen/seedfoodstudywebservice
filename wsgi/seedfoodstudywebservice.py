@@ -1,4 +1,4 @@
-#!/usr/bin/python
+import os
 from datetime import timedelta
 from flask import Flask, jsonify, make_response, request, current_app, abort
 from functools import update_wrapper, wraps
@@ -113,7 +113,9 @@ def get_test():
     return "Testing the Seeding Food Studies Application"
 
 
-handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
-handler.setLevel(logging.WARNING)
-app.logger.addHandler(handler)
-initialize()    
+if __name__ == '__main__':
+    handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
+    handler.setLevel(logging.WARNING)
+    app.logger.addHandler(handler)
+    initialize()
+    app.run(host=os.environ['OPENSHIFT_PYTHON_IP'],port=int(os.environ['OPENSHIFT_PYTHON_PORT']),debug='false')
