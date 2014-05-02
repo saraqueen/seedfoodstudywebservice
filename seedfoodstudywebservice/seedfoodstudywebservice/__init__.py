@@ -6,7 +6,7 @@ from utils import initialize, get_chart_data, get_content_data_chart, get_cdt_da
 import logging
 from logging.handlers import RotatingFileHandler
 from werkzeug.contrib.cache import SimpleCache
-import os
+
 
 app = Flask(__name__)
 
@@ -112,8 +112,8 @@ def get_contentdata(ht):
 def get_test():
     return "Testing the Seeding Food Studies Application"
 
-if __name__ == '__main__':
-    handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.WARNING)
-    app.logger.addHandler(handler)
-    initialize()    
+
+handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
+handler.setLevel(logging.WARNING)
+app.logger.addHandler(handler)
+initialize()    
