@@ -5,29 +5,11 @@ from functools import update_wrapper, wraps
 from utils import initialize, get_chart_data, get_content_data_chart, get_cdt_data,get_crossref_data_chart
 import logging
 from logging.handlers import RotatingFileHandler
-from werkzeug.contrib.cache import SimpleCache
+
 
 
 app = Flask(__name__)
 
-CACHE_TIMEOUT = 300
-
-cache = SimpleCache()
-
-class cached(object):
-
-    def __init__(self, timeout=None):
-        self.timeout = timeout or CACHE_TIMEOUT
-
-    def __call__(self, f):
-        @wraps(f)
-        def decorator(*args, **kwargs):
-            response = cache.get(request.path)
-            if response is None:
-                response = f(*args, **kwargs)
-                cache.set(request.path, response, self.timeout)
-            return response
-        return decorator
 
 def crossdomain(origin=None, methods=None, headers=None,max_age=21600, attach_to_all=True,automatic_options=True):
     if methods is not None:
@@ -72,25 +54,16 @@ def crossdomain(origin=None, methods=None, headers=None,max_age=21600, attach_to
 
 @app.route('/chartdata',methods = ['GET'])
 @crossdomain(origin='*')
-@cached()
 def get_chartdata():
 	obj = get_chart_data()
 	return jsonify(obj)
 
 @app.route('/cdt',methods = ['GET'])
 @crossdomain(origin='*')
-@cached()
 def get_cdt():
     obj = get_cdt_data()
     return jsonify(obj)
 
-'''
-@app.route('/cdtdata/<string:ht>',methods = ['GET'])
-@crossdomain(origin='*')
-def get_cdtdata(ht):
-    obj = get_cdtdata(ht)
-    return jsonify(obj)
-'''
 
 @app.route('/crossref/<string:ht>',methods = ['GET'])
 @crossdomain(origin='*')
@@ -114,8 +87,8 @@ def get_test():
 
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('seedfoodstudy.log', maxBytes=10000, backupCount=1)
+    handler = RotatingFileHandler('/home/sgqueen/seedfoodstudy/seedfoodstudywebservice/logs/seedfoodstudy.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.WARNING)
     app.logger.addHandler(handler)
     initialize()
-    app.run(host=os.environ['OPENSHIFT_PYTHON_IP'],port=int(os.environ['OPENSHIFT_PYTHON_PORT']),debug='false')
+    app.run(host='0.0.0.0',port=5000,debug='true')

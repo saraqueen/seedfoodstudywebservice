@@ -467,7 +467,7 @@ def get_Wrapper():
         "id" : "F1",
         "name" : "LAND USE PLANNING",
         "header_text" : "LAND USE PLANNING DEFINES AND DESIGNATES ZONES FOR FOOD GROWING AT ALL SCALES",
-        "content_text" : "There are currently 150 people and 37 projects and 5 courses that deal with this topic.",
+        "content_text" : "",
         "color" : "8CC63F",
         "children" : [{
                 "id" : "F1_P1",

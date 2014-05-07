@@ -1,0 +1,39 @@
+<VirtualHost *:8080>
+
+        # ---- Configure VirtualHost Defaults ----
+
+    ServerAdmin saragleequeen@gmail.com 
+
+        DocumentRoot /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/http
+
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+
+        <Directory /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/http/>
+                Options Indexes FollowSymLinks MultiViews
+                AllowOverride None
+                Order allow,deny
+                allow from all
+        </Directory>
+
+        # ---- Configure WSGI Listener(s) ----
+
+        WSGIDaemonProcess flaskapp user=www-data group=www-data threads=5
+        WSGIScriptAlias /seedfoodstudywebservice /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/wsgi/seedfoodstudywebservice.wsgi 
+
+        <Directory /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/http/seedfoodstudywebservice>
+                WSGIProcessGroup flaskapp
+                WSGIApplicationGroup %{GLOBAL}
+                Order deny,allow
+                Allow from all
+        </Directory>
+
+        # ---- Configure Logging ----
+
+    ErrorLog /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/logs/error.log
+    LogLevel warn
+    CustomLog /home/sgqueen/seedfoodstudy/seedfoodstudywebservice/logs/access.log combined
+
+</VirtualHost>
