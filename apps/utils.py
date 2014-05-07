@@ -64,7 +64,10 @@ def initialize():
 	WRAPPER_DATA = get_Wrapper()
 	global CDT_WRAPPER_DATA
 	CDT_WRAPPER_DATA = get_CDT_Wrapper()
-
+	global CHART_DATA_OBJECT
+	CHART_DATA_OBJECT = create_chart_data()
+	global CDT_DATA_OBJECT
+	CDT_DATA_OBJECT = get_cdt()
 
 def load_data_from_csv():
     chart_data = pd.read_csv(dir + 'Seeding_Food_Studies_Main.csv', sep=',', index_col=None, header=0);
@@ -251,8 +254,10 @@ def getProjectsForField(fieldId):
 			create_cross_ref_map(s,row[1],ultimate_cross_ref_cdt)
 	return project_names
 
-
 def get_chart_data():
+	return CHART_DATA_OBJECT
+
+def create_chart_data():
 	chartObject = WRAPPER_DATA
 	wrap = chartObject["children"];
 	for field in wrap:
@@ -348,8 +353,10 @@ def get_content_data_chart(ht):
 	return contentArray
 
 
-
 def get_cdt_data():
+	return CDT_DATA_OBJECT
+
+def get_cdt():
 	cdtObject = CDT_WRAPPER_DATA
 	cdt_wrap = cdtObject["children"]
 	count = 0

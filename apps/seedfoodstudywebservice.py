@@ -87,8 +87,8 @@ def get_test():
 
 
 if __name__ == '__main__':
-    handler = RotatingFileHandler('/home/sgqueen/seedfoodstudy/seedfoodstudywebservice/logs/seedfoodstudy.log', maxBytes=10000, backupCount=1)
-    handler.setLevel(logging.WARNING)
-    app.logger.addHandler(handler)
+    #handler = RotatingFileHandler('/home/sgqueen/seedfoodstudy/seedfoodstudywebservice/logs/seedfoodstudy.log', maxBytes=10000, backupCount=1)
+    #handler.setLevel(logging.WARNING)
+    #app.logger.addHandler(handler)
     initialize()
-    app.run(host='0.0.0.0',port=5000,debug='true')
+    app.run(host=os.environ['OPENSHIFT_PYTHON_IP'],port=int(os.environ['OPENSHIFT_PYTHON_PORT']),debug='false')
