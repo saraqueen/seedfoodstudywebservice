@@ -6,7 +6,7 @@ from dataset import get_Wrapper, get_Fields, get_Projects, get_Courses, get_CDT_
 
 
 config = ConfigParser.RawConfigParser()
-config.read('sdf.cfg')
+config.read('/var/lib/openshift/536aaf5c4382eca54f00019f/app-root/runtime/repo/apps/sdf.cfg')
 
 name_coll = ["Q3_1_TEXT", "Q3_2_TEXT","Q3_5_TEXT","Q3_3_TEXT","Q3_4_TEXT"]
 
